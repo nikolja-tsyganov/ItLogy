@@ -1,1 +1,148 @@
-<p class="test">main-page works!</p>
+<div class="top-menu">
+    <div class="top-menu__content">
+        <div class="top-menu__left">
+            <img src="/images/header-pizza.png" class="top-menu__icon">
+            <div class="top-menu__title">PIZZA<br>CHEFF</div>
+        </div>
+        <div class="top-menu__right">
+            <div class="top-menu__links">
+                <a class="top-menu__link">Пиццы</a>
+                <a class="top-menu__link">Напитки</a>
+                <a class="top-menu__link">Доставка и оплата</a>
+                <a class="top-menu__link">Контакты</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="top-block">
+        <div class="top-block__left">
+            <h1 class="top-block__title">
+                <span class="dark-title">Самая вкусная пицца в мире</span>
+                <br>
+                <span class="light-title">только в Pizza Cheff</span>
+            </h1>
+
+            <div class="best-practices">
+                <div class="best-practice">
+                    <img src="/images/hop.png" class="best-practice__icon">
+                    <div class="best-practice__content">
+                        <h4 class="best-practice__title">Лучшее тесто</h4>
+                        <span class="best-practice__text">Мы создаем тесто только из отборной итальянской муки наивысшего качества</span>
+                    </div>
+                </div>
+                <div class="best-practice">
+                    <img src="/images/kitchen-pack.png" class="best-practice__icon">
+                    <div class="best-practice__content">
+                        <h4 class="best-practice__title">Лучшие повара</h4>
+                        <span class="best-practice__text">Пиццы готовят самые профессиональные итальянские повара</span>
+                    </div>
+                </div>
+                <div class="best-practice">
+                    <img src="/images/seo-and-web.png" class="best-practice__icon">
+                    <div class="best-practice__content">
+                        <h4 class="best-practice__title">Гарантия качества</h4>
+                        <span class="best-practice__text">Наша пиццерия получила множество наград и признаний по всему миру</span>
+                    </div>
+                </div>
+                <div class="best-practice">
+                    <img src="/images/holidays.png" class="best-practice__icon">
+                    <div class="best-practice__content">
+                        <h4 class="best-practice__title">Отборные рецепты</h4>
+                        <span class="best-practice__text">Мы используем рецепты от&nbsp;мировых лидеров в&nbsp;изготовлении пиццы</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="top-block__button" (click)="scrollToPizzas()">Выбрать пиццу</button>
+        </div>
+
+        <div class="top-block__right">
+            <img src="/images/pizza_big.png" class="top-block__pizza">
+        </div>
+    </div>
+
+    <div class="pizzas-block" #pizzaBlock>
+        <h2 class="pizzas-block__title">Выберите свою любимую пиццу </h2>
+        <div class="pizzas-block__grid" [style.gridTemplateRows]="`repeat(${pizzasStringsNumber}, auto)`">
+            @for (pizza of pizzas; track $index) {
+                <div class="pizza">
+                    <img [src]="pizza.photo" class="pizza__photo">
+                    <div class="pizza__bottom">
+                        <div class="pizza__content">
+                            <h4 class="pizza__title">{{pizza.name}}</h4>
+                            <p class="pizza__ingredients">{{pizza.ingredients}}</p>
+                        </div>
+                        <button class="pizza__add" (click)="addPizzaToOrder(pizza.name)">В корзину</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="order-block">
+        <div class="order-block__left">
+            <h2 class="order-block__title">
+                <span class="light-title">Хватит думать!</span>
+                <br>
+                <span class="dark-title">Доставим заказ за 30 минут!</span>
+            </h2>
+            <span class="order-block__text">
+                Мы  гарантированно доставим вашу пиццу за 30 минут с момента оформления заказа.
+                Если мы опоздаем даже на 1 минуту - вы получаете весь заказ бесплатно и ваучер на скидку на следующий заказ.
+                Мы гордимся нашим сервисом и сделаем всё, чтобы наш клиент был доволен и не остался голодный!
+            </span>
+        </div>
+        <div class="order-block__center">
+            <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
+                <div class="input-wrapper">
+                    <input
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder="Ваше имя"
+                        [(ngModel)]="order.name"
+                        required
+                        #nameRef="ngModel"
+                    />
+                </div>
+                <div class="input-wrapper">
+                    <input
+                        type="text"
+                        name="address"
+                        id="address"
+                        placeholder="Адрес доставки"
+                        [(ngModel)]="order.address"
+                        required
+                        #addressRef="ngModel"
+                    />
+                </div>
+                <div class="input-wrapper">
+                    <input
+                        type="text"
+                        name="phone"
+                        id="phone"
+                        placeholder="Телефон"
+                        [(ngModel)]="order.phone"
+                        required
+                        #phoneRef="ngModel"
+                    />
+                </div>
+                <button [disabled]="orderForm.invalid">Оформить заказ</button>
+            </form>
+        </div>
+        <div class="order-block__right">
+            <img src="/images/pizzzzza-slice.png" class="order-block__slice"/>
+        </div>
+    </div>
+</div>
+
+@if (modalDialogVisible) {
+    <div class="overlay">
+        <div class="modal-dialog">
+            <span class="modal-dialog__text">Уууупс!<br> Похоже, вы не заказали ни одной пиццы!</span>
+            <button class="modal-dialog__button" (click)="choosePizza()">Выбрать пиццу</button>
+        </div>
+    </div>
+}
