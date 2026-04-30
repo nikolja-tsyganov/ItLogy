@@ -68,7 +68,7 @@
         <div class="pizzas-block__grid" [style.gridTemplateRows]="`repeat(${pizzasStringsNumber}, auto)`">
             @for (pizza of pizzas; track $index) {
                 <div class="pizza">
-                    <img [src]="pizza.photo" class="pizza__photo">
+                    <img [src]="pizza.photo" class="pizza__photo" (click)="showBigPizza(pizza)">
                     <div class="pizza__bottom">
                         <div class="pizza__content">
                             <h4 class="pizza__title">{{pizza.name}}</h4>
@@ -151,5 +151,14 @@
                 <button class="modal-dialog__button" (click)="chooseMorePizza()">Заказать ещё!</button>
             </div>
         }
+    </div>
+}
+
+@if(bigPizzaVisible) {
+    <div class="overlay">
+        <div class="modal-dialog pizza">
+            <img [src]="currentBigPizza?.photo">
+            <button class="modal-dialog__button" (click)="hideBigPizza()">Закрыть</button>
+        </div>
     </div>
 }

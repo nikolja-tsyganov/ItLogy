@@ -25,6 +25,9 @@ export class MainPageComponent {
     public modalDialogVisible = false;
     public orderAdded = false;
 
+    public currentBigPizza: Pizza | null = null;
+    public bigPizzaVisible: boolean = false;
+
     order: Order = {
         name: '',
         address: '',
@@ -111,5 +114,15 @@ export class MainPageComponent {
             this.modalDialogVisible = true;
             this.orderAdded = true;
         }
+    }
+
+    showBigPizza(pizza: Pizza): void {
+        this.bigPizzaVisible = true;
+        this.currentBigPizza = pizza;
+    }
+
+    hideBigPizza(): void {
+        this.bigPizzaVisible = false;
+        this.currentBigPizza = null;
     }
 }

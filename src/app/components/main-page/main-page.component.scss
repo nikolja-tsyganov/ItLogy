@@ -110,6 +110,10 @@ $color-dark: #b99150;
         font-family: "Muller";
         color: #382400;
         font-weight: 700;
+
+        &:hover {
+            background-color: #ff8018;
+        }
     }
 
     .best-practices {
@@ -203,6 +207,7 @@ $color-dark: #b99150;
                 max-width: calc(100% - 4rem);
                 min-height: 14.4rem;
                 margin-bottom: 1.3rem;
+                cursor: pointer;
             }
 
             &__bottom {
@@ -247,6 +252,10 @@ $color-dark: #b99150;
                 font-family: "Muller";
                 color: #020303;
                 font-weight: 700;
+
+                &:hover {
+                    background-color: #ff8018;
+                }
             }
         }
     }
@@ -345,6 +354,11 @@ $color-dark: #b99150;
 
                 &:disabled {
                     opacity: 0.5;
+                    cursor: default;
+                }
+
+                &:hover:not(:disabled) {
+                    background-color: #ff8018;
                 }
             }
         }
@@ -385,6 +399,17 @@ $color-dark: #b99150;
         justify-content: center;
         align-items: center;
 
+        &.pizza {
+            width: fit-content;
+            padding-left: 5rem;
+            padding-right: 5rem;
+            height: 70vh;
+
+            img {
+                height: 70%;
+            }
+        }
+
         &__text {
             font-size: 1.6rem;
             font-family: "Muller";
@@ -412,6 +437,10 @@ $color-dark: #b99150;
             font-family: "Muller";
             color: #382400;
             font-weight: 700;
+
+            &:hover {
+                background-color: #ff8018;
+            }
         }
     }
 }
