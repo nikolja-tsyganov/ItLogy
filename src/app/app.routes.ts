@@ -3,11 +3,13 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 
 export const routes: Routes = [
     {
-        path: 'main',
+        path: '',
         component: MainPageComponent,
+        pathMatch: 'full'
     },
     {
         path: '**',
-        redirectTo: '/main',
+        redirectTo: '/',
+        pathMatch: 'full'
     }
 ];
