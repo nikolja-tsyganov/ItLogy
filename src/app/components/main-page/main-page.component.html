@@ -140,9 +140,16 @@
 
 @if (modalDialogVisible) {
     <div class="overlay">
-        <div class="modal-dialog">
-            <span class="modal-dialog__text">Уууупс!<br> Похоже, вы не заказали ни одной пиццы!</span>
-            <button class="modal-dialog__button" (click)="choosePizza()">Выбрать пиццу</button>
-        </div>
+        @if (!orderAdded) {
+            <div class="modal-dialog">
+                <span class="modal-dialog__text">Уууупс!<br> Похоже, вы не заказали ни одной пиццы!</span>
+                <button class="modal-dialog__button" (click)="choosePizza()">Выбрать пиццу</button>
+            </div>
+        } @else {
+            <div class="modal-dialog">
+                <span class="modal-dialog__text">Спасибо за заказ!<br> Курьер уже в пути!</span>
+                <button class="modal-dialog__button" (click)="chooseMorePizza()">Заказать ещё!</button>
+            </div>
+        }
     </div>
 }

@@ -23,6 +23,7 @@ export class MainPageComponent {
     public pizzasStringsNumber = 0;
 
     public modalDialogVisible = false;
+    public orderAdded = false;
 
     order: Order = {
         name: '',
@@ -83,6 +84,18 @@ export class MainPageComponent {
         this.scrollToPizzas();
     }
 
+    public chooseMorePizza(): void {
+        this.modalDialogVisible = false;
+        this.orderAdded = false;
+        this.order = {
+            name: '',
+            address: '',
+            phone: '',
+            pizzas: [],
+        }
+        this.scrollToPizzas();
+    }
+
     public onSubmit(orderForm: NgForm) {
         if(this.order.pizzas.length === 0) {
             this.modalDialogVisible = true;
@@ -95,6 +108,8 @@ export class MainPageComponent {
                     console.log(err);
                 }
             });
+            this.modalDialogVisible = true;
+            this.orderAdded = true;
         }
     }
 }
